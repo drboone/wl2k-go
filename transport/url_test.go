@@ -17,6 +17,7 @@ func TestParseURL(t *testing.T) {
 		"ax25:///LA1B-10/LA5NTA":               {Scheme: "ax25", Target: "LA5NTA", Digis: []string{"LA1B-10"}, Params: url.Values{}},
 		"ax25://axport/LA5NTA":                 {Scheme: "ax25", Host: "axport", Target: "LA5NTA", Digis: []string{}, Params: url.Values{}},
 		"ax25://0/LA5NTA":                      {Scheme: "ax25", Host: "0", Target: "LA5NTA", Digis: []string{}, Params: url.Values{}},
+		"netrom://nrnino/HEECHA":               {Scheme: "netrom", Host: "nrnino", Target: "HEECHA", Digis: []string{}, Params: url.Values{}},
 		"serial-tnc:///LA5NTA?host=/dev/ttyS0": {Scheme: "serial-tnc", Host: "/dev/ttyS0", Target: "LA5NTA", Digis: []string{}, Params: url.Values{"host": []string{"/dev/ttyS0"}}},
 
 		"telnet://LA5NTA:CMSTelnet@server.winlink.org:8772/wl2k": {
