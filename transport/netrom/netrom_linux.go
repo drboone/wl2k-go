@@ -161,13 +161,11 @@ func DialNetROMTimeout(nrPort, mycall, targetcall string, timeout time.Duration)
 	} else {
 		socket = fd(f)
 	}
-fmt.Fprint(os.Stderr, "DialNetROMTimeout: socket call succeeded\n")
 	// Bind
 	if err := socket.bind(localAddr); err != nil {
 		return nil, err
 	}
 
-fmt.Fprint(os.Stderr, "DialNetROMTimeout: bind call succeeded\n")
 	// Connect
 	err := socket.connectTimeout(remoteAddr, timeout)
 	if err != nil {
@@ -381,12 +379,10 @@ func (a *ax25Addr) ax25_address() ax25_address {
 }
 
 func (a *ax25Addr) setPort(port string) (err error) {
-// FIXME
-	C.ax25_aton_entry(
+	C.ax25_aton(
 		C.nr_config_get_addr(C.CString(port)),
-		&a.fsa_digipeater[0].ax25_call[0],
+		(*C.struct_full_sockaddr_ax25)(unsafe.Pointer(&a)),
 	)
-	a.fsa_ax25.sax25_ndigis = 1
 	return
 }
 
